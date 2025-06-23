@@ -8,6 +8,7 @@ import 'dotenv/config'
 import 'hardhat-deploy'
 import 'hardhat-contract-sizer'
 import '@nomiclabs/hardhat-ethers'
+import '@nomicfoundation/hardhat-verify'
 import '@layerzerolabs/toolbox-hardhat'
 import '@layerzerolabs/lz-v2-utilities'
 import '@layerzerolabs/metadata-tools'
@@ -74,6 +75,19 @@ const config: HardhatUserConfig = {
         deployer: {
             default: 0, // wallet address of index[0], of the mnemonic in .env
         },
+    },
+    etherscan: {
+        // Your API key for Etherscan
+        // Obtain one at https://etherscan.io/
+        apiKey: {
+            baseSepolia: process.env.ETHERSCAN_API_KEY_BASE || '',
+            bscTestnet: process.env.ETHERSCAN_API_KEY_BSC || '',
+        },
+    },
+    sourcify: {
+        // Disabled by default
+        // Doesn't need an API key
+        enabled: true,
     },
 }
 

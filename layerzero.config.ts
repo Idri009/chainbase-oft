@@ -71,6 +71,50 @@
 //         connections,
 //     }
 // }
+// import { EndpointId } from '@layerzerolabs/lz-definitions'
+// import { ExecutorOptionType } from '@layerzerolabs/lz-v2-utilities'
+// import { TwoWayConfig, generateConnectionsConfig } from '@layerzerolabs/metadata-tools'
+// import { OAppEnforcedOption } from '@layerzerolabs/toolbox-hardhat'
+//
+// import type { OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
+//
+// const baseSepoliaContract: OmniPointHardhat = {
+//     eid: EndpointId.BASESEP_V2_TESTNET,
+//     contractName: 'ChainbaseOFTAdapter',
+// }
+//
+// const bscTestnetContract: OmniPointHardhat = {
+//     eid: EndpointId.BSC_V2_TESTNET,
+//     contractName: 'ChainbaseOFT',
+// }
+//
+// const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
+//     {
+//         msgType: 1,
+//         optionType: ExecutorOptionType.LZ_RECEIVE,
+//         gas: 80000,
+//         value: 0,
+//     },
+// ]
+//
+// // 只需要一个双向路径：Base Sepolia <-> BSC Testnet
+// const pathways: TwoWayConfig[] = [
+//     [
+//         baseSepoliaContract,
+//         bscTestnetContract,
+//         [['LayerZero Labs'], []], // 使用官方 DVN
+//         [1, 1], // 两边都使用 1 个确认数
+//         [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS],
+//     ],
+// ]
+//
+// export default async function () {
+//     const connections = await generateConnectionsConfig(pathways)
+//     return {
+//         contracts: [{ contract: baseSepoliaContract }, { contract: bscTestnetContract }],
+//         connections,
+//     }
+// }
 import { EndpointId } from '@layerzerolabs/lz-definitions'
 import { ExecutorOptionType } from '@layerzerolabs/lz-v2-utilities'
 import { TwoWayConfig, generateConnectionsConfig } from '@layerzerolabs/metadata-tools'
@@ -78,13 +122,13 @@ import { OAppEnforcedOption } from '@layerzerolabs/toolbox-hardhat'
 
 import type { OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
 
-const baseSepoliaContract: OmniPointHardhat = {
-    eid: EndpointId.BASESEP_V2_TESTNET,
+const baseContract: OmniPointHardhat = {
+    eid: EndpointId.BASE_V2_MAINNET,
     contractName: 'ChainbaseOFTAdapter',
 }
 
-const bscTestnetContract: OmniPointHardhat = {
-    eid: EndpointId.BSC_V2_TESTNET,
+const bscContract: OmniPointHardhat = {
+    eid: EndpointId.BSC_V2_MAINNET,
     contractName: 'ChainbaseOFT',
 }
 
@@ -97,13 +141,13 @@ const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
     },
 ]
 
-// 只需要一个双向路径：Base Sepolia <-> BSC Testnet
+// 只需要一个双向路径：Base <-> BSC
 const pathways: TwoWayConfig[] = [
     [
-        baseSepoliaContract,
-        bscTestnetContract,
+        baseContract,
+        bscContract,
         [['LayerZero Labs'], []], // 使用官方 DVN
-        [1, 1], // 两边都使用 1 个确认数
+        [20, 20], // 两边都使用 20 个确认数
         [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS],
     ],
 ]
@@ -111,7 +155,7 @@ const pathways: TwoWayConfig[] = [
 export default async function () {
     const connections = await generateConnectionsConfig(pathways)
     return {
-        contracts: [{ contract: baseSepoliaContract }, { contract: bscTestnetContract }],
+        contracts: [{ contract: baseContract }, { contract: bscContract }],
         connections,
     }
 }

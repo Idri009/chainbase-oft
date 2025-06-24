@@ -56,14 +56,24 @@ const config: HardhatUserConfig = {
         ],
     },
     networks: {
-        'base-sepolia': {
-            eid: EndpointId.BASESEP_V2_TESTNET,
-            url: process.env.RPC_URL_BASE_SEPOLIA || 'https://base-sepolia.gateway.tenderly.co',
+        // 'base-sepolia': {
+        //     eid: EndpointId.BASESEP_V2_TESTNET,
+        //     url: process.env.RPC_URL_BASE_SEPOLIA || 'https://base-sepolia.gateway.tenderly.co',
+        //     accounts,
+        // },
+        // 'bsc-testnet': {
+        //     eid: EndpointId.BSC_V2_TESTNET,
+        //     url: process.env.RPC_URL_BSC_TESTNET || 'https://bsc-testnet-rpc.publicnode.com',
+        //     accounts,
+        // },
+        base: {
+            eid: EndpointId.BASE_V2_MAINNET,
+            url: process.env.RPC_URL_BASE || 'https://base-rpc.publicnode.com',
             accounts,
         },
-        'bsc-testnet': {
-            eid: EndpointId.BSC_V2_TESTNET,
-            url: process.env.RPC_URL_BSC_TESTNET || 'https://bsc-testnet-rpc.publicnode.com',
+        bsc: {
+            eid: EndpointId.BSC_V2_MAINNET,
+            url: process.env.RPC_URL_BSC || 'https://bsc-rpc.publicnode.com',
             accounts,
         },
         hardhat: {

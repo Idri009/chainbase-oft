@@ -90,8 +90,10 @@ const config: HardhatUserConfig = {
         // Your API key for Etherscan
         // Obtain one at https://etherscan.io/
         apiKey: {
-            baseSepolia: process.env.ETHERSCAN_API_KEY_BASE || '',
-            bscTestnet: process.env.ETHERSCAN_API_KEY_BSC || '',
+            // baseSepolia: process.env.ETHERSCAN_API_KEY_BASE || '',
+            base: process.env.ETHERSCAN_API_KEY_BASE || '',
+            // bscTestnet: process.env.ETHERSCAN_API_KEY_BSC || '',
+            bsc: process.env.ETHERSCAN_API_KEY_BSC || '',
         },
     },
     sourcify: {
